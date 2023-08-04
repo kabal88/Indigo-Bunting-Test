@@ -8,10 +8,9 @@ namespace Interfaces
     {
         IdleState IdleState { get; }
         DeadState DeadState { get; }
-        MovingState MovingState { get; }
         CrossFinishLineState CrossFinishLineState { get; }
-        JumpState JumpState { get; }
         FallingState FallingState { get; }
+        StandUpState StandUpState { get; }
         UnitModel Model { get; }
         UnitView View { get; }
         ITarget Target { get; }

@@ -13,16 +13,10 @@ namespace Description
     {
         [SerializeField] private CameraIdentifier _id;
 
-        [FormerlySerializedAs("_speed")] [SerializeField] private float _forwardSpeed;
-        [HorizontalGroup(LabelWidth = 80)][SerializeField] private float _leftBorder;
-        [HorizontalGroup(LabelWidth = 80)][SerializeField] private float _rightBorder;
-        [SerializeField] private float _sideSpeed;
+        [SerializeField, Range(0,1)] private float _movingRatio;
 
         public int Id => _id.Id;
 
-        public CameraModel Model => new(_forwardSpeed,
-            _leftBorder,
-            _rightBorder,
-            _sideSpeed);
+        public CameraModel Model => new(_movingRatio);
     }
 }

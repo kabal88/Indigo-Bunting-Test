@@ -5,7 +5,6 @@ namespace Interfaces
 {
     public interface ISpawnPoint
     {
-        Transform Parent { get; }
         SpawnData Data { get; }
     }
 }

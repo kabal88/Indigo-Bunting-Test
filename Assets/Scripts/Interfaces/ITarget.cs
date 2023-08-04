@@ -1,9 +1,11 @@
+using UnityEngine;
+
 namespace Interfaces
 {
     public interface ITarget
     {
-        int CurrentNumber { get; }
-        void AddToCurrentNumber(int value);
-        void Die();
+        void SetRagdoll(bool isOn);
+
+        void AddForce(Vector3 force);
     }
 }

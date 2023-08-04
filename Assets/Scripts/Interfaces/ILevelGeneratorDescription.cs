@@ -6,6 +6,6 @@ namespace Interfaces
     public interface ILevelGeneratorDescription : IDescription
     {
         LevelGeneratorModel Model { get; }
-        GameObject Prefab { get; }
+        // GameObject Prefab { get; }
     }
 }

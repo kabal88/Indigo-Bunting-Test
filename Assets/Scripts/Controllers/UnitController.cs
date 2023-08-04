@@ -9,11 +9,10 @@ using Views;
 
 namespace Controllers
 {
-    public class UnitController : IUpdatable, IActivatable, IUnitContext, IDisposable, ITarget
+    public class UnitController : IUpdatable, IActivatable, IUnitContext, IDisposable, ITarget, ICameraTarget
     {
         public event Action Dead;
         public event Action CrossFinishLine;
-        public event Action<int> NumberChanged; 
 
         private UnitStateBase _currentState;
 
@@ -21,46 +20,39 @@ namespace Controllers
         public int CurrentNumber => Model.CurrentNumber;
         public IdleState IdleState { get; private set; }
         public DeadState DeadState { get; private set; }
-        public MovingState MovingState { get; private set; }
         public CrossFinishLineState CrossFinishLineState { get; private set; }
-        public JumpState JumpState { get; private set;}
         public FallingState FallingState { get; private set;}
+        public StandUpState StandUpState { get; private set; }
         public UnitModel Model { get; private set; }
         public UnitView View { get; private set; }
         
         public ITarget Target => this;
 
+        public Vector3 Position => View.PositionForCamera;
 
 
-        public UnitController(UnitModel model, GameObject prefab ,  Transform parant, SpawnData spawnData)
+        public UnitController(UnitModel model, GameObject prefab , SpawnData spawnData)
         {
             Model = model;
             
             View = GameObject.Instantiate(prefab, spawnData.Position, spawnData.Rotation).GetComponent<UnitView>();
-            View.transform.SetParent(parant);
+            //View.transform.SetParent(parant);
             View.Init();
             
             Model.SetStartLocalPosition(View.transform.localPosition);
 
             IdleState = new IdleState(this);
             DeadState = new DeadState(this);
-            MovingState = new MovingState(this);
             CrossFinishLineState = new CrossFinishLineState(this);
-            JumpState = new JumpState(this);
             FallingState = new FallingState(this);
+            StandUpState = new StandUpState(this);
             
-            SetState(IdleState);
+            SetState(StandUpState);
 
             ServiceLocator.Get<UpdateLocalService>().RegisterObject(this);
         }
         
-        public void SetNumber(int value)
-        {
-            Model.SetCurrentNumber(value);
-            View.SetNumber(Model.CurrentNumber);
-            NumberChanged?.Invoke(Model.CurrentNumber);
-        }
-        
+
         public void SetActive(bool isOn)
         {
             Model.SetIsActive(isOn);
@@ -90,18 +82,12 @@ namespace Controllers
         {
             Dead?.Invoke();
         }
-        
+
         public void OnCrossFinishLine()
         {
             CrossFinishLine?.Invoke();
         }
-
-        public void AddToCurrentNumber(int value)
-        {
-            Model.AddToCurrentNumber(value);
-            View.SetNumber(Model.CurrentNumber);
-            NumberChanged?.Invoke(Model.CurrentNumber);
-        }
+        
 
         public void Die()
         {
@@ -110,7 +96,7 @@ namespace Controllers
 
         public void Reset()
         {
-            SetState(IdleState);
+            SetState(StandUpState);
             Model.SetIsActive(true);
             Model.SetIsAlive(true);
             var transform = View.transform;
@@ -126,16 +112,10 @@ namespace Controllers
 
             DeadState.Dispose();
             DeadState = null;
-            
-            MovingState.Dispose();
-            MovingState = null;
-            
+
             CrossFinishLineState.Dispose();
             CrossFinishLineState = null;
-            
-            JumpState.Dispose();
-            JumpState = null;
-            
+
             FallingState.Dispose();
             FallingState = null;
 

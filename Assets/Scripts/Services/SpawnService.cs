@@ -5,7 +5,7 @@ using Interfaces;
 using UnityEngine;
 using Views;
 
-namespace Systems
+namespace Services
 {
     public class SpawnService : IRepository<ISpawnPoint>
     {

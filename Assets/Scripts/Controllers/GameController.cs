@@ -3,9 +3,7 @@ using Libraries;
 using Models;
 using Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Systems;
 using Views;
 
 
@@ -47,22 +45,23 @@ namespace Controllers
             InitServices();
 
             var levelGeneratorDescription = _library.GetLevelGeneratorDescription(_model.LevelGeneratorId);
-            _levelGenerator = new LevelGenerator(levelGeneratorDescription.Model, levelGeneratorDescription.Prefab);
+            _levelGenerator = new LevelGenerator(levelGeneratorDescription.Model);
             _levelGenerator.LevelGenerationFinished += OnLevelGenerationFinished;
 
-            _unitController = CreateUnit();
             _levelGenerator.GenerateLevel(_playerModel.Level);
+            _unitController = CreateUnit();
 
             _cameraController.Init();
+            _cameraController.SetTarget(_unitController);
 
             _updateLocalService.RegisterObject(_cameraController);
-            _inputListenerService.RegisterObject(_cameraController);
 
-            _unitController.HandleState(_unitController.MovingState);
+            _unitController.HandleState(_unitController.StandUpState);
             _cameraController.SetActive(true);
             _gameUIController.HideAllWindows();
             _gameUIController.SetLevel(_playerModel.Level);
             _gameUIController.SetMoney(_playerModel.Money);
+            _gameUIController.RestartButtonClicked += Restart;
         }
 
         public void UpdateLocal(float deltaTime)
@@ -125,8 +124,7 @@ namespace Controllers
             _levelGenerator.GenerateLevel(_playerModel.Level);
             _cameraController.ResetCamera();
             _unitController.Reset();
-            _unitController.SetNumber(_playerModel.StartNumber);
-            _unitController.HandleState(_unitController.MovingState);
+            _unitController.HandleState(_unitController.StandUpState);
             _gameUIController.HideAllWindows();
         }
 
@@ -139,10 +137,10 @@ namespace Controllers
         {
             var description = _library.GetUnitDescription(_model.UnitDescriptionId);
             var spawnPoint = _spawnService.GetObjectsByPredicate(
-                x => x.Data.Id == SpawnPointIdentifierMap.UnitSpawnPoint).First();
+                x => x.Data.Id == SpawnPointIdentifierMap.HeroPoint).First();
             var controller =
-                new UnitController(description.Model, description.Prefab, spawnPoint.Parent, spawnPoint.Data);
-            controller.SetNumber(_playerModel.StartNumber);
+                new UnitController(description.Model, description.Prefab, spawnPoint.Data);
+            
             controller.Dead += OnLose;
             controller.CrossFinishLine += OnWin;
             return controller;

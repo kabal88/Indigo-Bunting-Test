@@ -20,7 +20,8 @@ namespace Controllers.UnitStates
 
         public override void StartState()
         {
-            Unit.View.PlayFallingAnimation(() => Unit.HandleState(Unit.DeadState));
+            Unit.View.SetRigidbodiesKinematic(false);
+            Unit.View.SetAnimatorEnabled(false);
         }
 
         public override void UpdateLocal(float deltaTime)

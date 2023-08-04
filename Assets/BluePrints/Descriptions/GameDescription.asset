@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8af4be331594865bb239b7da6cb52cb, type: 3}
+  m_Name: GameDescription
+  m_EditorClassIdentifier: 
+  description:
+    _id: {fileID: 11400000, guid: 5f0e1a995da6e074798db896b5dfd624, type: 2}
+    _levelGeneratorId: {fileID: 11400000, guid: 641b5828806fd4046aa41c3e3bdca92a,
+      type: 2}
+    _inputDescriptionId: {fileID: 11400000, guid: 917ebb25918706248bb5c3b265948f0d,
+      type: 2}
+    _cameraId: {fileID: 11400000, guid: 349b51fcfb4850240b0b5fd0008cb443, type: 2}
+    _unitId: {fileID: 11400000, guid: dcc01f20f1d252a4f8a702ac6bfa6784, type: 2}

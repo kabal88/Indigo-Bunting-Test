@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7f5ebc98e8469a9a96d423d66c2bb2, type: 3}
   m_Name: SampleGameID
   m_EditorClassIdentifier: 
-  _id: 0
+  _id: -1048016611

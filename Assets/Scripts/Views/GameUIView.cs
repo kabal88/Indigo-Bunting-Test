@@ -11,13 +11,9 @@ namespace Views
             add => _winWindow.NextButtonClicked += value;
             remove => _winWindow.NextButtonClicked -= value;
         }
-        
-        public event Action RestartButtonClicked
-        {
-            add => _loseWindow.RestartButtonClicked += value;
-            remove => _loseWindow.RestartButtonClicked += value;
-        }
-        
+
+        public event Action RestartButtonClicked;
+
         private WindowBase[] _windows;
 
         private WinWindow _winWindow;
@@ -28,9 +24,11 @@ namespace Views
         {
             _winWindow = GetComponentInChildren<WinWindow>();
             _loseWindow = GetComponentInChildren<LoseWindow>();
+            _loseWindow.RestartButtonClicked += OnRestartClicked;
             _windows = GetComponentsInChildren<WindowBase>();
             _mainUi = GetComponentInChildren<MainUi>();
             _mainUi.Init();
+            _mainUi.RestartButtonClicked += OnRestartClicked;
         }
         
         public void OpenWindow(int windowId)
@@ -74,6 +72,17 @@ namespace Views
         public void SetMoney(int value)
         {
             _mainUi.SetMoney(value);
+        }
+        
+        private void OnRestartClicked()
+        {
+            RestartButtonClicked?.Invoke();
+        }
+
+        private void OnDestroy()
+        {
+            _loseWindow.RestartButtonClicked -= OnRestartClicked;
+            _mainUi.RestartButtonClicked -= OnRestartClicked;
         }
     }
 }

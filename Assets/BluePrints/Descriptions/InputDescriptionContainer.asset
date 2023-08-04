@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: InputDescriptionContainer
   m_EditorClassIdentifier: 
   description:
-    _id: {fileID: 0}
-    actions: {fileID: -944628639613478452, guid: 1882c12f197a9d34681613763138cbc3,
+    _id: {fileID: 11400000, guid: 917ebb25918706248bb5c3b265948f0d, type: 2}
+    _actions: {fileID: -944628639613478452, guid: 1882c12f197a9d34681613763138cbc3,
       type: 3}
-    inputActionSettings:
+    _inputActionSettings:
     - ActionName: Move
       Identifier: {fileID: 11400000, guid: f5bb4e825121b98408c2d08b499714ca, type: 2}
       InputAction:
-        m_Name: 
+        m_Name: Input
         m_Type: 0
         m_ExpectedControlType: 
-        m_Id: 
+        m_Id: c432c928-247f-49c6-8d5b-cc5342f9aafc
         m_Processors: 
         m_Interactions: 
         m_SingletonActionBindings: []
@@ -31,10 +31,10 @@ MonoBehaviour:
     - ActionName: Fire
       Identifier: {fileID: 11400000, guid: 52c0a8202cea1234a93f8c981b89453f, type: 2}
       InputAction:
-        m_Name: 
+        m_Name: Input
         m_Type: 0
         m_ExpectedControlType: 
-        m_Id: 
+        m_Id: 824453ea-7386-4e41-8335-bd677f54de98
         m_Processors: 
         m_Interactions: 
         m_SingletonActionBindings: []
@@ -42,10 +42,10 @@ MonoBehaviour:
     - ActionName: Point
       Identifier: {fileID: 11400000, guid: a4ad114171a1509498e05fc5471a4021, type: 2}
       InputAction:
-        m_Name: 
+        m_Name: Input
         m_Type: 0
         m_ExpectedControlType: 
-        m_Id: 
+        m_Id: 5a55ecc1-65bc-4289-9d89-4cda8fa5ebce
         m_Processors: 
         m_Interactions: 
         m_SingletonActionBindings: []
@@ -53,10 +53,10 @@ MonoBehaviour:
     - ActionName: Navigate
       Identifier: {fileID: 11400000, guid: d69f7970a59cf294f9fa07b318991893, type: 2}
       InputAction:
-        m_Name: 
+        m_Name: Input
         m_Type: 0
         m_ExpectedControlType: 
-        m_Id: 
+        m_Id: de855bf6-39f8-4fa1-bbaa-89df52ab4b6c
         m_Processors: 
         m_Interactions: 
         m_SingletonActionBindings: []
@@ -64,10 +64,10 @@ MonoBehaviour:
     - ActionName: Submit
       Identifier: {fileID: 11400000, guid: 04e6801ce06b5204aa00247ba0c11bd6, type: 2}
       InputAction:
-        m_Name: 
+        m_Name: Input
         m_Type: 0
         m_ExpectedControlType: 
-        m_Id: 
+        m_Id: 8b1aafff-e21b-4064-86ca-a0515285ccb5
         m_Processors: 
         m_Interactions: 
         m_SingletonActionBindings: []
@@ -75,10 +75,10 @@ MonoBehaviour:
     - ActionName: Cancel
       Identifier: {fileID: 11400000, guid: 60f52ab4eecba8547aabea2beea2126e, type: 2}
       InputAction:
-        m_Name: 
+        m_Name: Input
         m_Type: 0
         m_ExpectedControlType: 
-        m_Id: 
+        m_Id: 1e63a137-fb2f-472e-8c8d-a5f999e09e98
         m_Processors: 
         m_Interactions: 
         m_SingletonActionBindings: []
@@ -86,10 +86,10 @@ MonoBehaviour:
     - ActionName: Click
       Identifier: {fileID: 11400000, guid: 13f3eb9991fe6ed4ab51dd58cd5ac3bb, type: 2}
       InputAction:
-        m_Name: 
+        m_Name: Input
         m_Type: 0
         m_ExpectedControlType: 
-        m_Id: 
+        m_Id: 97384ab5-99b8-48d3-8ea2-f0272442095f
         m_Processors: 
         m_Interactions: 
         m_SingletonActionBindings: []
@@ -97,10 +97,10 @@ MonoBehaviour:
     - ActionName: ScrollWheel
       Identifier: {fileID: 11400000, guid: f5f40e14fc111c74fb7dfbb529eeaec1, type: 2}
       InputAction:
-        m_Name: 
+        m_Name: Input
         m_Type: 0
         m_ExpectedControlType: 
-        m_Id: 
+        m_Id: 8321e02e-8940-405a-b01c-babb8bd322fe
         m_Processors: 
         m_Interactions: 
         m_SingletonActionBindings: []
@@ -108,10 +108,10 @@ MonoBehaviour:
     - ActionName: MiddleClick
       Identifier: {fileID: 11400000, guid: ee19ab6add965bb4e8542a3723d8dc84, type: 2}
       InputAction:
-        m_Name: 
+        m_Name: Input
         m_Type: 0
         m_ExpectedControlType: 
-        m_Id: 
+        m_Id: 7a054dc8-2691-4df2-84a5-f438baf515c4
         m_Processors: 
         m_Interactions: 
         m_SingletonActionBindings: []
@@ -119,10 +119,10 @@ MonoBehaviour:
     - ActionName: RightClick
       Identifier: {fileID: 11400000, guid: f906ae78841e50e4ebaf55ad78e1e039, type: 2}
       InputAction:
-        m_Name: 
+        m_Name: Input
         m_Type: 0
         m_ExpectedControlType: 
-        m_Id: 
+        m_Id: d26e9bf2-bd31-4ca0-9914-8da2d20ac854
         m_Processors: 
         m_Interactions: 
         m_SingletonActionBindings: []
@@ -130,10 +130,10 @@ MonoBehaviour:
     - ActionName: TrackedDevicePosition
       Identifier: {fileID: 11400000, guid: b9eb0be050dd9be42969f8680ec13454, type: 2}
       InputAction:
-        m_Name: 
+        m_Name: Input
         m_Type: 0
         m_ExpectedControlType: 
-        m_Id: 
+        m_Id: 4a88aca0-cf28-4b25-af65-21fc0f168c33
         m_Processors: 
         m_Interactions: 
         m_SingletonActionBindings: []
@@ -141,10 +141,10 @@ MonoBehaviour:
     - ActionName: TrackedDeviceOrientation
       Identifier: {fileID: 11400000, guid: 7a7a8a4f52816ea4dad9eec9e7b635b6, type: 2}
       InputAction:
-        m_Name: 
+        m_Name: Input
         m_Type: 0
         m_ExpectedControlType: 
-        m_Id: 
+        m_Id: a51ed5de-8b95-4036-91ab-bb494ccce97d
         m_Processors: 
         m_Interactions: 
         m_SingletonActionBindings: []

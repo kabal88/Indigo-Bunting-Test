@@ -14,31 +14,30 @@ namespace Descriptions
     {
         [SerializeField] private LevelGeneratorIdentifier _id;
         [SerializeField] private int _numberOfLevelsForRepeating = 3;
-        [SerializeField] private GameObject _prefab;
+        [SerializeField] private LevelConfig[] _levelConfigs;
 
         public int Id => _id.Id;
 
-        public LevelGeneratorModel Model => new(_numberOfLevelsForRepeating);
-
-        public GameObject Prefab => _prefab;
+        public LevelGeneratorModel Model => new(_numberOfLevelsForRepeating, _levelConfigs);
+        
 
 
 #if UNITY_EDITOR
         [Button(SdfIconType.Stack, IconAlignment.LeftOfText)]
         public void SortByOrder()
         {
-            // if (_roadConfigs == null)
-            //     return;
-            //
-            // var sorted = _roadConfigs.OrderBy(x => x.Order);
-            // _roadConfigs = sorted.ToArray();
+            if (_levelConfigs == null)
+                return;
+            
+            var sorted = _levelConfigs.OrderBy(x => x.Order);
+            _levelConfigs = sorted.ToArray();
         }
 
         [Button(SdfIconType.Search, IconAlignment.LeftOfText)]
         public void CollectConfigs()
         {
-            // var array = new SOProvider<RoadConfig>().GetCollection().ToArray();
-            // _roadConfigs = array;
+            var array = new SOProvider<LevelConfig>().GetCollection().ToArray();
+            _levelConfigs = array;
         }
 #endif
     }
