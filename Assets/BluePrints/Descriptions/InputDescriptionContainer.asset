@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15a0853053145a099e2a175ad395ca2, type: 3}
+  m_Name: InputDescriptionContainer
+  m_EditorClassIdentifier: 
+  description:
+    _id: {fileID: 0}
+    actions: {fileID: -944628639613478452, guid: 1882c12f197a9d34681613763138cbc3,
+      type: 3}
+    inputActionSettings:
+    - ActionName: Move
+      Identifier: {fileID: 11400000, guid: f5bb4e825121b98408c2d08b499714ca, type: 2}
+      InputAction:
+        m_Name: 
+        m_Type: 0
+        m_ExpectedControlType: 
+        m_Id: 
+        m_Processors: 
+        m_Interactions: 
+        m_SingletonActionBindings: []
+        m_Flags: 0
+    - ActionName: Fire
+      Identifier: {fileID: 11400000, guid: 52c0a8202cea1234a93f8c981b89453f, type: 2}
+      InputAction:
+        m_Name: 
+        m_Type: 0
+        m_ExpectedControlType: 
+        m_Id: 
+        m_Processors: 
+        m_Interactions: 
+        m_SingletonActionBindings: []
+        m_Flags: 0
+    - ActionName: Point
+      Identifier: {fileID: 11400000, guid: a4ad114171a1509498e05fc5471a4021, type: 2}
+      InputAction:
+        m_Name: 
+        m_Type: 0
+        m_ExpectedControlType: 
+        m_Id: 
+        m_Processors: 
+        m_Interactions: 
+        m_SingletonActionBindings: []
+        m_Flags: 0
+    - ActionName: Navigate
+      Identifier: {fileID: 11400000, guid: d69f7970a59cf294f9fa07b318991893, type: 2}
+      InputAction:
+        m_Name: 
+        m_Type: 0
+        m_ExpectedControlType: 
+        m_Id: 
+        m_Processors: 
+        m_Interactions: 
+        m_SingletonActionBindings: []
+        m_Flags: 0
+    - ActionName: Submit
+      Identifier: {fileID: 11400000, guid: 04e6801ce06b5204aa00247ba0c11bd6, type: 2}
+      InputAction:
+        m_Name: 
+        m_Type: 0
+        m_ExpectedControlType: 
+        m_Id: 
+        m_Processors: 
+        m_Interactions: 
+        m_SingletonActionBindings: []
+        m_Flags: 0
+    - ActionName: Cancel
+      Identifier: {fileID: 11400000, guid: 60f52ab4eecba8547aabea2beea2126e, type: 2}
+      InputAction:
+        m_Name: 
+        m_Type: 0
+        m_ExpectedControlType: 
+        m_Id: 
+        m_Processors: 
+        m_Interactions: 
+        m_SingletonActionBindings: []
+        m_Flags: 0
+    - ActionName: Click
+      Identifier: {fileID: 11400000, guid: 13f3eb9991fe6ed4ab51dd58cd5ac3bb, type: 2}
+      InputAction:
+        m_Name: 
+        m_Type: 0
+        m_ExpectedControlType: 
+        m_Id: 
+        m_Processors: 
+        m_Interactions: 
+        m_SingletonActionBindings: []
+        m_Flags: 0
+    - ActionName: ScrollWheel
+      Identifier: {fileID: 11400000, guid: f5f40e14fc111c74fb7dfbb529eeaec1, type: 2}
+      InputAction:
+        m_Name: 
+        m_Type: 0
+        m_ExpectedControlType: 
+        m_Id: 
+        m_Processors: 
+        m_Interactions: 
+        m_SingletonActionBindings: []
+        m_Flags: 0
+    - ActionName: MiddleClick
+      Identifier: {fileID: 11400000, guid: ee19ab6add965bb4e8542a3723d8dc84, type: 2}
+      InputAction:
+        m_Name: 
+        m_Type: 0
+        m_ExpectedControlType: 
+        m_Id: 
+        m_Processors: 
+        m_Interactions: 
+        m_SingletonActionBindings: []
+        m_Flags: 0
+    - ActionName: RightClick
+      Identifier: {fileID: 11400000, guid: f906ae78841e50e4ebaf55ad78e1e039, type: 2}
+      InputAction:
+        m_Name: 
+        m_Type: 0
+        m_ExpectedControlType: 
+        m_Id: 
+        m_Processors: 
+        m_Interactions: 
+        m_SingletonActionBindings: []
+        m_Flags: 0
+    - ActionName: TrackedDevicePosition
+      Identifier: {fileID: 11400000, guid: b9eb0be050dd9be42969f8680ec13454, type: 2}
+      InputAction:
+        m_Name: 
+        m_Type: 0
+        m_ExpectedControlType: 
+        m_Id: 
+        m_Processors: 
+        m_Interactions: 
+        m_SingletonActionBindings: []
+        m_Flags: 0
+    - ActionName: TrackedDeviceOrientation
+      Identifier: {fileID: 11400000, guid: 7a7a8a4f52816ea4dad9eec9e7b635b6, type: 2}
+      InputAction:
+        m_Name: 
+        m_Type: 0
+        m_ExpectedControlType: 
+        m_Id: 
+        m_Processors: 
+        m_Interactions: 
+        m_SingletonActionBindings: []
+        m_Flags: 0
