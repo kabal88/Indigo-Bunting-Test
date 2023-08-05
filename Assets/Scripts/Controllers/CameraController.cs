@@ -58,9 +58,9 @@ namespace Controllers
 
         public void ResetCamera()
         {
-            _view.transform.position = _model.StartPosition;
-            _model.SetHasTarget(false);
-            SetActive(true);
+            // _view.transform.position = _model.StartPosition;
+            // _model.SetHasTarget(false);
+            // SetActive(true);
         }
 
         public void SetActive(bool isOn)

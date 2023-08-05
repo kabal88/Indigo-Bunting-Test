@@ -22,6 +22,7 @@ namespace Controllers
         private InputListenerService _inputListenerService;
         private CameraController _cameraController;
         private UnitController _unitController;
+        private PlayerController _playerController;
 
 
         public bool IsAlive { get; }
@@ -62,6 +63,10 @@ namespace Controllers
             _gameUIController.SetLevel(_playerModel.Level);
             _gameUIController.SetMoney(_playerModel.Money);
             _gameUIController.RestartButtonClicked += Restart;
+            
+            var playerControllerDescription = _library.GetPlayerControllerDescription(_model.PlayerControllerDescriptionId);
+            _playerController = new PlayerController(playerControllerDescription.AbilitiesController, playerControllerDescription.RaycastSettings);
+            _inputListenerService.RegisterObject(_playerController);
         }
 
         public void UpdateLocal(float deltaTime)
@@ -99,7 +104,6 @@ namespace Controllers
         {
             _cameraController.SetActive(false);
             _playerModel.SetLevel(_playerModel.Level + 1);
-            _playerModel.AddMoney(_unitController.CurrentNumber);
             _gameUIController.SetLevel(_playerModel.Level);
             _gameUIController.SetMoney(_playerModel.Money);
             _gameUIController.OpenWindow(WindowIdentifiersMap.WinWindow);

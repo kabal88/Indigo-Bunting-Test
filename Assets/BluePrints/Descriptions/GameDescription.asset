@@ -20,3 +20,5 @@ MonoBehaviour:
       type: 2}
     _cameraId: {fileID: 11400000, guid: 349b51fcfb4850240b0b5fd0008cb443, type: 2}
     _unitId: {fileID: 11400000, guid: dcc01f20f1d252a4f8a702ac6bfa6784, type: 2}
+    _playerControllerId: {fileID: 11400000, guid: 5bf7788e0cf51e8479830fd901b05410,
+      type: 2}

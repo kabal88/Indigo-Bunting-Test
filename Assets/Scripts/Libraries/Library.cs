@@ -19,6 +19,7 @@ namespace Libraries
         private Dictionary<int, ILevelGeneratorDescription> _levelGeneratorDescriptions = new();
         private Dictionary<int, IInputDescription> _inputDescriptions = new();
         private Dictionary<int, ICameraDescription> _cameraDescriptions = new();
+        private Dictionary<int, IPlayerControllerDescription> _playerControllerDescriptions = new();
 
 
         public void Init()
@@ -41,6 +42,9 @@ namespace Libraries
                         break;
                     case ICameraDescription data:
                         _cameraDescriptions.Add(description.GetDescription.Id, data);
+                        break;
+                    case IPlayerControllerDescription data:
+                        _playerControllerDescriptions.Add(description.GetDescription.Id, data);
                         break;
                 }
             }
@@ -107,6 +111,16 @@ namespace Libraries
             }
 
             throw new Exception($"Camera description with id {id} not found");
+        }
+        
+        public IPlayerControllerDescription GetPlayerControllerDescription(int id)
+        {
+            if (_playerControllerDescriptions.TryGetValue(id, out var needed))
+            {
+                return needed;
+            }
+
+            throw new Exception($"PlayerController description with id {id} not found");
         }
     }
 }

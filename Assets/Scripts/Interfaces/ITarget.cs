@@ -4,8 +4,11 @@ namespace Interfaces
 {
     public interface ITarget
     {
-        void SetRagdoll(bool isOn);
-
-        void AddForce(Vector3 force);
+        bool IsAlive { get; }
+    }
+    
+    public interface IHaveUnitContext
+    {
+        IUnitContext UnitContext { get; }
     }
 }

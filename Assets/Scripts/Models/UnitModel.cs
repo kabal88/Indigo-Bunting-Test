@@ -6,15 +6,17 @@ namespace Models
     {
         public bool IsAlive { get; private set; }
         public bool IsActive { get; private set; }
+        public bool IsInteractable { get; private set; }
         public int CurrentNumber { get; private set; }
         
         public Vector3 StartLocalPosition { get; private set; }
 
-        public UnitModel(int currentNumber, bool isAlive = true, bool isActive = true)
+        public UnitModel(int currentNumber, bool isAlive = true, bool isActive = true, bool isInteractable = true)
         {
             CurrentNumber = currentNumber;
             IsAlive = isAlive;
             IsActive = isActive;
+            IsInteractable = isInteractable;
         }
 
         public void SetCurrentNumber(int value)
@@ -40,6 +42,11 @@ namespace Models
         public void SetStartLocalPosition(Vector3 value)
         {
             StartLocalPosition = value;
+        }
+        
+        public void SetIsInteractable(bool isOn)
+        {
+            IsInteractable = isOn;
         }
     }
 }

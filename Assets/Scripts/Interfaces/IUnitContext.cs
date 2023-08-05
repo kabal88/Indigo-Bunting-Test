@@ -13,7 +13,6 @@ namespace Interfaces
         StandUpState StandUpState { get; }
         UnitModel Model { get; }
         UnitView View { get; }
-        ITarget Target { get; }
 
         /// <summary>
         /// Method for import state directly.

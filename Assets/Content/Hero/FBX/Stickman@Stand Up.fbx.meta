@@ -60,6 +60,14 @@ ModelImporter:
       - time: 0.54178953
         functionName: SendAnimationEvent
         data: 
+        objectReferenceParameter: {fileID: 11400000, guid: f1bbac7515de3e74abbdb56b27f202cc,
+          type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0
+        functionName: SendAnimationEvent
+        data: 
         objectReferenceParameter: {fileID: 11400000, guid: 7902b8b105537fc489efd35d797c1fb7,
           type: 2}
         floatParameter: 0

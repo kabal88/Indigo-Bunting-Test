@@ -1,12 +1,13 @@
 ﻿using System;
 using Components;
 using Interfaces;
+using Models;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Views
 {
-    public class UnitView : MonoBehaviour
+    public class UnitView : MonoBehaviour, ITarget, IHaveUnitContext
     {
         public event Action<int> AnimationEvent
         {
@@ -16,42 +17,50 @@ namespace Views
 
         [SerializeField] private GameObject _positionHolder;
         [SerializeField] private Rigidbody[] _rigidbodies;
-        [SerializeField] private Collider[] _colliders;
         [SerializeField] private Animator _animator;
 
         private CollisionProvider _collisionProvider;
         private AnimationEventProvider _animationEventProvider;
+        private static readonly int State = Animator.StringToHash("State");
+        private static readonly int InAction = Animator.StringToHash("InAction");
 
+        public bool IsAlive => UnitContext.Model.IsAlive;
+        
         public Vector3 Position => transform.position;
 
         public Vector3 PositionForCamera => _positionHolder.transform.position;
 
         public ICollisionProvider CollisionProvider => _collisionProvider;
 
-        public void Init()
+        public IUnitContext UnitContext { get; private set; }
+
+        public void Init(IUnitContext unitContext)
         {
+            UnitContext = unitContext;
             _collisionProvider = GetComponentInChildren<CollisionProvider>();
             _animationEventProvider = GetComponentInChildren<AnimationEventProvider>();
+            AnimationEvent += OnInActionAnimationEvent;
         }
 
 
-        public void PlayFallingAnimation(Action onComplete = null)
+        public void SetAnimationState(int stateId)
         {
-            // _tween?.Kill();
-            // var target = transform.localPosition - _fallingMoveParams.Target;
-            // _tween = transform.DOLocalMove(target, _fallingMoveParams.Duration)
-            //     .SetEase(_fallingMoveParams.Ease)
-            //     .OnComplete(() => { onComplete?.Invoke(); });
+            _animator.SetBool(InAction, false);
+            _animator.SetInteger(State, stateId);
+        }
+        
+        public void OnInActionAnimationEvent(int eventId)
+        {
+            if (eventId == AnimationEventIdentifierMap.InAction)
+            {
+                _animator.SetBool(InAction, true);
+            }
+            
         }
 
         public void PlayDeadAnimation(Action onComplete = null)
         {
-            // _tween?.Kill();
-            // var target = transform.localPosition + _deadParams.EndValue;
-            // _tween = transform.DOLocalJump(target, _deadParams.JumpPower, _deadParams.NumJumps, _deadParams.Duration,
-            //         _deadParams.Snapping)
-            //     .SetEase(_deadParams.Ease)
-            //     .OnComplete(() => { onComplete?.Invoke(); });
+
         }
 
         public void SetRigidbodiesKinematic(bool value)
@@ -67,23 +76,49 @@ namespace Views
             _animator.enabled = value;
         }
 
+        public Rigidbody GetHittedRigidbody(Vector3 hitPoint)
+        {
+            float closestDistance = 0;
+            var index = 0;
+
+            for (var i = 0; i < _rigidbodies.Length; i++)
+            {
+                if (i == 0)
+                {
+                    closestDistance = SqrDistance(_rigidbodies[i].position, hitPoint);
+                    continue;
+                }
+                
+                float distance = SqrDistance(_rigidbodies[i].position, hitPoint);
+
+                if ( distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    index = i;
+                }
+            }
+
+            return _rigidbodies[index];
+        }
+
+        private float SqrDistance(Vector3 startPoint, Vector3 endPoint)
+        {
+            var dir = endPoint - startPoint;
+            return Vector3.SqrMagnitude(dir);
+        }
+
         private void OnDestroy()
         {
             _collisionProvider = null;
             _positionHolder = null;
             _rigidbodies = null;
+            AnimationEvent -= OnInActionAnimationEvent;
         }
 
         [Button]
         private void CollectRigidbodies()
         {
             _rigidbodies = GetComponentsInChildren<Rigidbody>();
-        }
-
-        [Button]
-        private void CollectColliders()
-        {
-            _colliders = GetComponentsInChildren<Collider>();
         }
     }
 }

@@ -24,6 +24,7 @@ namespace Controllers.UnitStates
             Unit.View.SetRigidbodiesKinematic(true);
             Unit.View.SetAnimatorEnabled(true);
             Unit.View.AnimationEvent += OnAnimationEvent;
+            Unit.View.SetAnimationState(AnimationStateIdentifierMap.StandUp);
         }
 
         private void OnAnimationEvent(int id)
