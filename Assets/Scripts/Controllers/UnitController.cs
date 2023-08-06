@@ -87,7 +87,7 @@ namespace Controllers
 
         public void Reset()
         {
-            SetState(StandUpState);
+            SetState(IdleState);
             Model.SetIsActive(true);
             Model.SetIsAlive(true);
             var transform = View.transform;

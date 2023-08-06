@@ -1,7 +1,8 @@
 ﻿using System;
 using Components;
+using Data;
+using Helpers;
 using Interfaces;
-using Models;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -15,31 +16,61 @@ namespace Views
             remove => _animationEventProvider.AnimationEvent -= value;
         }
 
-        [SerializeField] private GameObject _positionHolder;
-        [SerializeField] private Rigidbody[] _rigidbodies;
-        [SerializeField] private Animator _animator;
+        public event Action<int> CollectMoney;
 
-        private CollisionProvider _collisionProvider;
+        [SerializeField] private GameObject _positionHolder;
+        [SerializeField] private CollisionProvider _playerCollisionProvider;
+        [SerializeField] private CollisionProvider _floorCollisionProvider;
+        [SerializeField, BoxGroup("Animation")]  private Animator _animator;
+        [SerializeField] private LayerMask _floorLayerMask;
+        [SerializeField, BoxGroup("Bones")] private Transform _hipBone;
+        [SerializeField, BoxGroup("Bones")] private Rigidbody _hipBoneRigidbody;
+        [SerializeField, BoxGroup("Bones")] private Transform[] _bones;
+        [SerializeField, BoxGroup("Rigidbody")] private Rigidbody[] _rigidbodies;
+        [SerializeField, BoxGroup("Animation")] private BoneData[] _standUpAnimationStartBoneData;
+
+        private RaycastHit _hitInfo;
         private AnimationEventProvider _animationEventProvider;
         private static readonly int State = Animator.StringToHash("State");
         private static readonly int InAction = Animator.StringToHash("InAction");
 
         public bool IsAlive => UnitContext.Model.IsAlive;
-        
+
         public Vector3 Position => transform.position;
 
         public Vector3 PositionForCamera => _positionHolder.transform.position;
 
-        public ICollisionProvider CollisionProvider => _collisionProvider;
+        public ICollisionProvider PlayerCollisionProvider => _playerCollisionProvider;
+        public ICollisionProvider FloorCollisionProvider => _floorCollisionProvider;
+
+        public float SqrSpeedOfHip => _hipBoneRigidbody.velocity.sqrMagnitude;
 
         public IUnitContext UnitContext { get; private set; }
+
+        public Transform[] Bones => _bones;
+
+        public int BonesCount => _bones.Length;
+
+        public BoneData[] StandUpAnimationStartBoneData => _standUpAnimationStartBoneData;
 
         public void Init(IUnitContext unitContext)
         {
             UnitContext = unitContext;
-            _collisionProvider = GetComponentInChildren<CollisionProvider>();
             _animationEventProvider = GetComponentInChildren<AnimationEventProvider>();
             AnimationEvent += OnInActionAnimationEvent;
+            _floorCollisionProvider.TriggerEnter += OnFloorCollisionEnter;
+            
+            var bones = GetComponentsInChildren<BoneTag>();
+            foreach (var b in bones)
+            {
+                b.SetOwner(this);
+                //todo нужно добавить отслеживание коллизий с объектами
+            }
+        }
+
+        private void OnFloorCollisionEnter(Collider obj)
+        {
+            Debug.Log($"Floor collision enter {obj.name}");
         }
 
 
@@ -48,19 +79,17 @@ namespace Views
             _animator.SetBool(InAction, false);
             _animator.SetInteger(State, stateId);
         }
-        
+
         public void OnInActionAnimationEvent(int eventId)
         {
             if (eventId == AnimationEventIdentifierMap.InAction)
             {
                 _animator.SetBool(InAction, true);
             }
-            
         }
 
         public void PlayDeadAnimation(Action onComplete = null)
         {
-
         }
 
         public void SetRigidbodiesKinematic(bool value)
@@ -88,10 +117,10 @@ namespace Views
                     closestDistance = SqrDistance(_rigidbodies[i].position, hitPoint);
                     continue;
                 }
-                
+
                 float distance = SqrDistance(_rigidbodies[i].position, hitPoint);
 
-                if ( distance < closestDistance)
+                if (distance < closestDistance)
                 {
                     closestDistance = distance;
                     index = i;
@@ -99,6 +128,25 @@ namespace Views
             }
 
             return _rigidbodies[index];
+        }
+
+        public void AddMoney(int value)
+        {
+            CollectMoney?.Invoke(value);  
+        }
+
+        public void AlignParentTransformToHips()
+        {
+            var originalHipsPosition = _hipBone.position;
+            transform.position = originalHipsPosition;
+
+            if (Physics.Raycast(transform.position, Vector3.down, out _hitInfo, 10f, _floorLayerMask))
+            {
+                transform.position = new Vector3(transform.position.x, _hitInfo.point.y, transform.position.z);
+            }
+
+
+            _hipBone.position = originalHipsPosition;
         }
 
         private float SqrDistance(Vector3 startPoint, Vector3 endPoint)
@@ -109,16 +157,60 @@ namespace Views
 
         private void OnDestroy()
         {
-            _collisionProvider = null;
+            _playerCollisionProvider = null;
+            _floorCollisionProvider = null;
             _positionHolder = null;
             _rigidbodies = null;
             AnimationEvent -= OnInActionAnimationEvent;
         }
+        
+#if UNITY_EDITOR
 
-        [Button]
+        [Button, BoxGroup("Rigidbody")]
         private void CollectRigidbodies()
         {
             _rigidbodies = GetComponentsInChildren<Rigidbody>();
         }
+
+        [Button, BoxGroup("Test")]
+        private void StandUp()
+        {
+            UnitContext.HandleState(UnitContext.StandUpState);
+        }
+
+        [Button, BoxGroup("Animation")]
+        private void SnapshotStartBoneData()
+        {
+            var bones = _hipBone.GetComponentsInChildren<Transform>();
+            _standUpAnimationStartBoneData = new BoneData[bones.Length];
+            _standUpAnimationStartBoneData.SnapshotBoneData(bones);
+        }
+
+        [Button("Snapshot from anim clip"), BoxGroup("Animation")]
+        private void SnapshotStartBoneDataFromAnimationClip(string clipName = "Stand Up")
+        {
+            var bones = _hipBone.GetComponentsInChildren<Transform>();
+            _standUpAnimationStartBoneData = new BoneData[bones.Length];
+            
+            foreach (AnimationClip clip in _animator.runtimeAnimatorController.animationClips)
+            {
+                if (clip.name == clipName)
+                {
+                    clip.SampleAnimation(gameObject, 0);
+                    _standUpAnimationStartBoneData.SnapshotBoneData(bones);
+                    Debug.Log("Snapshot done");
+                    return;
+                }
+            }
+            
+            Debug.Log("No clip found");
+        }
+
+        [Button, BoxGroup("Bones")]
+        private void CollectBones()
+        {
+            _bones = _hipBone.GetComponentsInChildren<Transform>();
+        }
+#endif
     }
 }

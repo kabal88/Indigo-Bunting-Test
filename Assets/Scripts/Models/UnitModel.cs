@@ -7,28 +7,16 @@ namespace Models
         public bool IsAlive { get; private set; }
         public bool IsActive { get; private set; }
         public bool IsInteractable { get; private set; }
-        public int CurrentNumber { get; private set; }
-        
+
         public Vector3 StartLocalPosition { get; private set; }
 
-        public UnitModel(int currentNumber, bool isAlive = true, bool isActive = true, bool isInteractable = true)
+        public UnitModel(bool isAlive = true, bool isActive = true, bool isInteractable = true)
         {
-            CurrentNumber = currentNumber;
             IsAlive = isAlive;
             IsActive = isActive;
             IsInteractable = isInteractable;
         }
-
-        public void SetCurrentNumber(int value)
-        {
-            CurrentNumber = value;
-        }
-
-        public void AddToCurrentNumber(int value)
-        {
-            CurrentNumber += value;
-        }
-
+        
         public void SetIsActive(bool isOn)
         {
             IsActive = isOn;

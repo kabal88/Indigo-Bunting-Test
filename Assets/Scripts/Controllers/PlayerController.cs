@@ -17,6 +17,8 @@ namespace Controllers
 
         public bool IsAlive { get; }
 
+        public Transform Transform { get; }
+
         public PlayerController(AbilitiesController abilitiesController, RaycastSettings raycastSettings)
         {
             _abilitiesController = abilitiesController;

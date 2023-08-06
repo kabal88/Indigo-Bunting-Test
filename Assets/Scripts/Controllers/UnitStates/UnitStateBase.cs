@@ -12,6 +12,7 @@ namespace Controllers.UnitStates
         public UnitStateBase(IUnitContext unit)
         {
             Unit = unit;
+            IsAlive = true;
         }
 
         public abstract void HandleState(UnitStateBase newState);

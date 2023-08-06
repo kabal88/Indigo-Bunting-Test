@@ -57,7 +57,7 @@ namespace Controllers
 
             _updateLocalService.RegisterObject(_cameraController);
 
-            _unitController.HandleState(_unitController.StandUpState);
+            _unitController.HandleState(_unitController.IdleState);
             _cameraController.SetActive(true);
             _gameUIController.HideAllWindows();
             _gameUIController.SetLevel(_playerModel.Level);
@@ -128,7 +128,6 @@ namespace Controllers
             _levelGenerator.GenerateLevel(_playerModel.Level);
             _cameraController.ResetCamera();
             _unitController.Reset();
-            _unitController.HandleState(_unitController.StandUpState);
             _gameUIController.HideAllWindows();
         }
 

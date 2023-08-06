@@ -20,6 +20,8 @@ namespace Controllers.UnitStates
 
         public override void StartState()
         {
+            Unit.View.SetRigidbodiesKinematic(true);
+            Unit.View.SetAnimatorEnabled(true);
             Unit.Model.SetIsInteractable(true);
             Unit.View.SetAnimationState(AnimationStateIdentifierMap.Idle);
         }

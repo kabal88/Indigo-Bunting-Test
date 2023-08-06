@@ -11,7 +11,6 @@ namespace Descriptions
     public class UnitDescription : IUnitDescription
     {
         [SerializeField] private UnitIdentifier _id;
-        [SerializeField] private int _startNumber;
         [SerializeField, AssetsOnly] private GameObject _prefab;
 
 
@@ -19,7 +18,6 @@ namespace Descriptions
         public GameObject Prefab => _prefab;
 
 
-        public UnitModel Model => new(
-            _startNumber);
+        public UnitModel Model => new();
     }
 }
