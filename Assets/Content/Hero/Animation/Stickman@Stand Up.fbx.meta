@@ -36,8 +36,8 @@ ModelImporter:
       name: Stand Up
       takeName: mixamo.com
       internalID: -203655887218126122
-      firstFrame: 0
-      lastFrame: 248
+      firstFrame: 35
+      lastFrame: 200
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -57,18 +57,18 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.54178953
+      - time: 0.05429864
         functionName: SendAnimationEvent
         data: 
-        objectReferenceParameter: {fileID: 11400000, guid: f1bbac7515de3e74abbdb56b27f202cc,
+        objectReferenceParameter: {fileID: 11400000, guid: 7902b8b105537fc489efd35d797c1fb7,
           type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0
+      - time: 1
         functionName: SendAnimationEvent
         data: 
-        objectReferenceParameter: {fileID: 11400000, guid: 7902b8b105537fc489efd35d797c1fb7,
+        objectReferenceParameter: {fileID: 11400000, guid: f1bbac7515de3e74abbdb56b27f202cc,
           type: 2}
         floatParameter: 0
         intParameter: 0

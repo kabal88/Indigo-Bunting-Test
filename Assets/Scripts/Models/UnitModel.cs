@@ -7,7 +7,6 @@ namespace Models
         public bool IsAlive { get; private set; }
         public bool IsActive { get; private set; }
         public bool IsInteractable { get; private set; }
-
         public Vector3 StartLocalPosition { get; private set; }
 
         public UnitModel(bool isAlive = true, bool isActive = true, bool isInteractable = true)

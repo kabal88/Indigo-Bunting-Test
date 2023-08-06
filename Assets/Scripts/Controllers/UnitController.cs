@@ -9,10 +9,12 @@ using Views;
 
 namespace Controllers
 {
-    public class UnitController : IUpdatable, IActivatable, IUnitContext, IDisposable, ICameraTarget
+    public class UnitController : IUpdatable, IActivatable, IUnitContext, IDisposable, ICameraTarget, ITarget
     {
         public event Action Dead;
         public event Action CrossFinishLine;
+        
+        public event Action<int> CollectMoney;
 
         private UnitStateBase _currentState;
 
@@ -43,10 +45,16 @@ namespace Controllers
             CrossFinishLineState = new CrossFinishLineState(this);
             FallingState = new FallingState(this);
             StandUpState = new StandUpState(this);
+            View.CollectMoney += OnCollectMoney;
 
-            SetState(StandUpState);
+            SetState(IdleState);
 
             ServiceLocator.Get<UpdateLocalService>().RegisterObject(this);
+        }
+
+        private void OnCollectMoney(int value)
+        {
+            CollectMoney?.Invoke(value);
         }
 
 
@@ -117,26 +125,6 @@ namespace Controllers
 
             GameObject.Destroy(View.gameObject);
             View = null;
-        }
-
-        public void SetRagdoll(bool isOn)
-        {
-            if (!Model.IsInteractable)
-            {
-                View.SetRigidbodiesKinematic(false);
-                View.SetAnimatorEnabled(false);
-            }
-        }
-
-        public void AddForce(Vector3 force, Vector3 hitPoint)
-        {
-            if (!Model.IsInteractable)
-            {
-                
-                var hitRigidbody = View.GetHittedRigidbody(hitPoint);
-
-                hitRigidbody.AddForceAtPosition(force, hitPoint, ForceMode.Impulse);
-            }
         }
     }
 }

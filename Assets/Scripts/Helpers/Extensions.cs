@@ -13,5 +13,10 @@ namespace Helpers
                 boneData[boneIndex].Rotation = bones[boneIndex].localRotation;
             }
         }
+        
+        public static T GetOrAddComponent<T>(this GameObject obj) where T : Component
+        {
+            return obj.GetComponent<T>() ?? obj.AddComponent<T>();
+        }
     }
 }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1184ccce1734adf9fffe8d3a6f118dd, type: 3}
   m_Name: HideOnTouchAbility
   m_EditorClassIdentifier: 
-  _identifier: {fileID: 0}
+  _identifier: {fileID: 11400000, guid: 084bc7a3404482743a476804e3c3ff5c, type: 2}

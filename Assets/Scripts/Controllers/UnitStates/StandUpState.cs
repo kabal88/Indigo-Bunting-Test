@@ -23,17 +23,18 @@ namespace Controllers.UnitStates
         {
             switch (newState)
             {
-                case IdleState state:
-                    Unit.SetState(state);
+                case IdleState:
+                    Unit.SetState(Unit.IdleState);
                     break;
             }
         }
 
         public override void StartState()
         {
+            Debug.Log("StandUpState: StartState");
             _elapsedResetBonesTime = 0;
             Unit.View.AlignParentTransformToHips();
-            _ragdollBoneData.SnapshotBoneData(Unit.View.Bones);
+            _ragdollBoneData.SnapshotBoneData(Unit.View.BonesTransforms);
             _isTransitioningToAnimationState = true;
             
         }
@@ -55,16 +56,11 @@ namespace Controllers.UnitStates
             
         }
 
-        public override void EndState()
-        {
-            Unit.View.AnimationEvent -= OnAnimationEvent;
-        }
-        
         private void TransitingBonesToAnimationState(Action callback)
         {
             _elapsedResetBonesTime += Time.deltaTime;
             float elapsedPercentage = _elapsedResetBonesTime / _timeToResetBones;
-            var bones = Unit.View.Bones;
+            var bones = Unit.View.BonesTransforms;
             var animStartState = Unit.View.StandUpAnimationStartBoneData;
 
             for (int i = 0; i < bones.Length; i ++)
@@ -94,6 +90,12 @@ namespace Controllers.UnitStates
             Unit.View.SetAnimatorEnabled(true);
             Unit.View.AnimationEvent += OnAnimationEvent;
             Unit.View.SetAnimationState(AnimationStateIdentifierMap.StandUp);
+        }
+
+        public override void EndState()
+        {
+            Unit.View.AnimationEvent -= OnAnimationEvent;
+            Debug.Log("StandUpState: EndState");
         }
     }
 }

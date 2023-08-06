@@ -1,4 +1,4 @@
-using UnityEngine;
+using System.Collections.Generic;
 
 namespace Interfaces
 {
@@ -10,5 +10,15 @@ namespace Interfaces
     public interface IHaveUnitContext
     {
         IUnitContext UnitContext { get; }
+    }
+
+    public interface ITargetWithBones : ITarget
+    {
+        IEnumerable<BoneTag> Bones { get; }
+    }
+    
+    public interface IMoneyCollector
+    {
+        void AddMoney(int value);
     }
 }

@@ -8,9 +8,9 @@ public class AddMoneyAbility : IAbility
     [SerializeField] private int _value = 1;
     public void Execute(IOwner owner = null, ITarget target = null)
     {
-        if (target is BoneTag bone)
+        if (target is IMoneyCollector collector)
         {
-            bone.Owner.AddMoney(_value);
+            collector.AddMoney(_value);
         }
     }
 }

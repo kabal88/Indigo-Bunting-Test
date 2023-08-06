@@ -6,14 +6,21 @@ using UnityEngine;
 
 namespace Views
 {
-    public class ComplexInteractableObject : InteractableObject
+    public class ComplexInteractableObject : InteractableObject, IOwner
     {
         [SerializeField] protected AbilityDescription[] Abilities;
         
-        private List<IDisposable> _disposable;
+        private List<IDisposable> _disposable = new();
+
+        public Transform Transform => transform;
 
         public override void Interact(IOwner owner = null, ITarget target = null)
         {
+            if (owner == null)
+            {
+                owner = this;
+            }
+            
             foreach (var a in Abilities)
             {
                 a.GetAbility.Execute(owner, target);

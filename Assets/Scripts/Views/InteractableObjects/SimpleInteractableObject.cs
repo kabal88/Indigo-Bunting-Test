@@ -5,14 +5,21 @@ using UnityEngine;
 
 namespace Views
 {
-    public class SimpleInteractableObject : InteractableObject
+    public class SimpleInteractableObject : InteractableObject, IOwner
     {
         [SerializeField] protected AbilityDescription Ability;
 
         private IDisposable _disposable;
 
+        public Transform Transform => transform;
+
         public override void Interact(IOwner owner = null, ITarget target = null)
         {
+            if (owner == null)
+            {
+                owner = this;
+            }
+            
             Ability.GetAbility.Execute(owner, target);
         }
 

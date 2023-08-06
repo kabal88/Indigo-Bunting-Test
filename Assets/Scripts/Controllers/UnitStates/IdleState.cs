@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using UnityEngine;
 
 namespace Controllers.UnitStates
 {
@@ -12,14 +13,15 @@ namespace Controllers.UnitStates
         {
             switch (newState)
             {
-                case FallingState state:
-                    Unit.SetState(state);
+                case FallingState:
+                    Unit.SetState(Unit.FallingState);
                     break;
             }
         }
 
         public override void StartState()
         {
+            Debug.Log("IdleState: StartState");
             Unit.View.SetRigidbodiesKinematic(true);
             Unit.View.SetAnimatorEnabled(true);
             Unit.Model.SetIsInteractable(true);
@@ -33,6 +35,7 @@ namespace Controllers.UnitStates
         public override void EndState()
         {
             Unit.Model.SetIsInteractable(false);
+            Debug.Log("IdleState: EndState");
         }
     }
 }

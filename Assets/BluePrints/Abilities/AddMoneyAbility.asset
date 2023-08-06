@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb1bb661a824f2ca5f2f9211ac276bd, type: 3}
   m_Name: AddMoneyAbility
   m_EditorClassIdentifier: 
-  _identifier: {fileID: 0}
+  _identifier: {fileID: 11400000, guid: 85a75b35bfb48684f96a2ff10e700444, type: 2}
+  _ability:
+    _value: 10

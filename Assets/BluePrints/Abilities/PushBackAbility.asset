@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e895ec740ff466bb58635cbe4c585a4, type: 3}
   m_Name: PushBackAbility
   m_EditorClassIdentifier: 
-  _identifier: {fileID: 0}
+  _identifier: {fileID: 11400000, guid: 1ead3bf1fd0057c4a9fbb03cb1233e1e, type: 2}
   _ability:
     _throwPower: 50

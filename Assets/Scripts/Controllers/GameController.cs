@@ -63,9 +63,11 @@ namespace Controllers
             _gameUIController.SetLevel(_playerModel.Level);
             _gameUIController.SetMoney(_playerModel.Money);
             _gameUIController.RestartButtonClicked += Restart;
-            
-            var playerControllerDescription = _library.GetPlayerControllerDescription(_model.PlayerControllerDescriptionId);
-            _playerController = new PlayerController(playerControllerDescription.AbilitiesController, playerControllerDescription.RaycastSettings);
+
+            var playerControllerDescription =
+                _library.GetPlayerControllerDescription(_model.PlayerControllerDescriptionId);
+            _playerController = new PlayerController(playerControllerDescription.AbilitiesController,
+                playerControllerDescription.RaycastSettings);
             _inputListenerService.RegisterObject(_playerController);
         }
 
@@ -78,7 +80,7 @@ namespace Controllers
         {
             _fixUpdateLocalService.FixedUpdateLocal();
         }
-        
+
         private void InitServices()
         {
             _updateLocalService = new UpdateLocalService();
@@ -133,9 +135,8 @@ namespace Controllers
 
         private void OnLevelGenerationFinished()
         {
-            
         }
-        
+
         private UnitController CreateUnit()
         {
             var description = _library.GetUnitDescription(_model.UnitDescriptionId);
@@ -143,10 +144,17 @@ namespace Controllers
                 x => x.Data.Id == SpawnPointIdentifierMap.HeroPoint).First();
             var controller =
                 new UnitController(description.Model, description.Prefab, spawnPoint.Data);
-            
+
             controller.Dead += OnLose;
             controller.CrossFinishLine += OnWin;
+            controller.CollectMoney += OnCollectMoney;
             return controller;
+        }
+
+        private void OnCollectMoney(int value)
+        {
+            _playerModel.AddMoney(value);
+            _gameUIController.SetMoney(_playerModel.Money);
         }
 
         public void Dispose()
